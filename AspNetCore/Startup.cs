@@ -1,3 +1,4 @@
+using AspNetCore.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -44,6 +45,8 @@ namespace AspNetCore
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseMiddleware<RequestEditingMiddleware>();
+            app.UseMiddleware<ResponseEditingMiddleware>();
 
             app.UseAuthorization();
 
