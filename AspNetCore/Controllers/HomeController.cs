@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCore.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,15 @@ namespace AspNetCore.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            // ViewBag, ViewData, TempData, Model
+
+            ViewBag.Name = "Ümit";
+            ViewData["Name"] = "Yuri Boyka";
+            TempData["Name"] = "Bruce Lee";
+
+            Customer customer = new() { FirstName = "Ernesto Che", LastName = "Guevara", Age = 39 };
+
+            return View(customer);
         }
     }
 }
