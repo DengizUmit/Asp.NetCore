@@ -24,6 +24,7 @@ namespace AspNetCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
             services.AddRazorPages();
         }
 
@@ -45,14 +46,23 @@ namespace AspNetCore
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseMiddleware<RequestEditingMiddleware>();
-            app.UseMiddleware<ResponseEditingMiddleware>();
+
+
+            //app.UseMiddleware<RequestEditingMiddleware>();
+            //app.UseMiddleware<ResponseEditingMiddleware>();
 
             app.UseAuthorization();
 
+            // Controller => View
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{Controller}/{Action}",
+                    defaults: new { Controller = "Home", Action = "Index"}
+                    );
+                //endpoints.MapRazorPages();
             });
         }
     }
