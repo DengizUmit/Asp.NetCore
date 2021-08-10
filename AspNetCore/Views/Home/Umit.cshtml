@@ -1,11 +1,36 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    //int age = 23;
+    //string value = string.Empty;
+    //if (age > 18)
+    //{
+    //    value = "Above 18";
+    //}
+    //else
+    //{
+    //    value = "Under 18";
+    //}
+
+    //int Calculate(int number1, int number2) 
+    //{
+    //    return number1 + number2;
+    //}
+    //var result = Calculate(7, 98);
+
+    List<string> names = new() { "Ragnar", "Lagertha", "Bjorn", "Atheltsan", "Helga" };
 }
 
 <p>
-    Lorem Ipsum
-    "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
-    "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
+    @*Status = @value*@
+    @*Status = @(age>18?" Above 18":" Under 18");*@
+
+    @*Status = @result;*@
 </p>
+
+    @foreach (var item in names)
+    {
+        <p>
+            @*@item;*@
+
+            @(item == "Ragnar"?"Ragnar Lothbrok":item)
+        </p>
+    }
