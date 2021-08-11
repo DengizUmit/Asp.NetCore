@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -44,6 +46,12 @@ namespace AspNetCore
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                RequestPath = "/node_modules",
+                FileProvider = new PhysicalFileProvider(Path.Combine
+                (Directory.GetCurrentDirectory(), "node_modules"))
+            });
 
             app.UseRouting();
 

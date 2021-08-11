@@ -2,25 +2,34 @@
 
     <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
+
+        @*Node Package Manager*@
+
         <title> Customer - List </title>
         <link href="~/css/site.css" rel="stylesheet" />
+        @*<link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />*@
+        <link href="~/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
     </head>
 
     <body>
-        <table>
-            <tr>
-                <td> First Name </td>
-                <td> Last Name </td>
-                <td> Age </td>
-            </tr>
-            @foreach (var item in Model)
-            {
+        <table class="table table-hover table-bordered">
+            <thead>
                 <tr>
-                    <td> @item.FirstName </td>
-                    <td> @item.LastName </td>
-                    <td> @item.Age </td>
+                    <td> First Name </td>
+                    <td> Last Name </td>
+                    <td> Age </td>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td> @item.FirstName </td>
+                        <td> @item.LastName </td>
+                        <td> @item.Age </td>
+                    </tr>
+                }
+            </tbody>
         </table>
     </body>
     </html>
