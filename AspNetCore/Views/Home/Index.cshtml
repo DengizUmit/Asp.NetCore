@@ -1,32 +1,26 @@
-﻿@model AspNetCore.Models.Customer
+﻿@model List<AspNetCore.Models.Customer>
 
-@{
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title> Customer - List </title>
+        <link href="~/css/site.css" rel="stylesheet" />
+    </head>
 
-}
-
-<p>
-    ViewBag.Name = @ViewBag.Name
-</p>
-
-<hr />
-
-<p>
-    ViewData["Name"] = @ViewData["Name"]
-</p>
-
-<hr />
-
-<p>
-    TempData["Name"] = @TempData["Name"]
-</p>
-
-<hr />
-
-<p>
-    First Name = @Model.FirstName
-    <br/>
-    Last Name = @Model.LastName
-    <br/>
-    Age = @Model.Age
-</p>
-
+    <body>
+        <table>
+            <tr>
+                <td> First Name </td>
+                <td> Last Name </td>
+                <td> Age </td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td> @item.FirstName </td>
+                    <td> @item.LastName </td>
+                    <td> @item.Age </td>
+                </tr>
+            }
+        </table>
+    </body>
+    </html>
