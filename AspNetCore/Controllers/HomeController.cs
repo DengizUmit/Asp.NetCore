@@ -11,15 +11,35 @@ namespace AspNetCore.Controllers
     {
         public IActionResult Index()
         {
-            // ViewBag, ViewData, TempData, Model
 
+            ITest test = new Test();
+            ITest test2 = new Test2();
+
+            // ViewBag, ViewData, TempData, Model
             ViewBag.Name = "Ümit";
             ViewData["Name"] = "Yuri Boyka";
             TempData["Name"] = "Bruce Lee";
 
             Customer customer = new() { FirstName = "Ernesto Che", LastName = "Guevara", Age = 39 };
 
-            return View(customer);
+            // return View(customer);
+
+            return RedirectToAction("Index", "Product", new { @id = 1 });
+        }
+
+        public interface ITest
+        {
+
+        }
+
+        public class Test : ITest
+        {
+
+        }
+
+        public class Test2 : ITest
+        {
+
         }
     }
 }
