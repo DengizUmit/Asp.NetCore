@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace AspNetCore.Controllers
 {
+    [Route("[controller]/[action]")]
     public class HomeController : Controller
     {
         public IActionResult Index()
@@ -15,6 +16,11 @@ namespace AspNetCore.Controllers
             ITest test = new Test();
             ITest test2 = new Test2();
 
+            //Dictionary<string, object> dictionary = new();
+            //var list = dictionary.Values;
+
+            var id = (string)RouteData.Values["id"];
+
             // ViewBag, ViewData, TempData, Model
             ViewBag.Name = "Ümit";
             ViewData["Name"] = "Yuri Boyka";
@@ -22,9 +28,9 @@ namespace AspNetCore.Controllers
 
             Customer customer = new() { FirstName = "Ernesto Che", LastName = "Guevara", Age = 39 };
 
-            // return View(customer);
+            return View(customer);
 
-            return RedirectToAction("Index", "Product", new { @id = 1 });
+            //return RedirectToAction("Index", "Product", new { @id = 1 });
         }
 
         public interface ITest

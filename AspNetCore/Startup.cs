@@ -57,11 +57,18 @@ namespace AspNetCore
 
             app.UseEndpoints(endpoints =>
             {
+                //endpoints.MapControllerRoute(
+                //    name: "productRoute",
+                //    pattern: "Products/{action}",
+                //    defaults : new {Controller = "Home"}
+                //    );
+
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{Controller}/{Action}",
+                    pattern: "{Controller}/{Action}/{id?}",
                     defaults: new { Controller = "Home", Action = "Index"}
                     );
+
                 //endpoints.MapRazorPages();
             });
         }
