@@ -65,5 +65,29 @@ namespace AspNetCore.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult Update()
+        {
+            var id = int.Parse(RouteData.Values["id"].ToString());
+
+            var updatedCustomer = CustomerContext.Customers.FirstOrDefault(a => a.Id == id);
+
+            return View(updatedCustomer);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCustomer()
+        {
+            var id = int.Parse(HttpContext.Request.Form["id"].ToString());
+
+            var updatedCustomer = CustomerContext.Customers.FirstOrDefault(a => a.Id == id);
+
+            updatedCustomer.FirstName = HttpContext.Request.Form["firstName"].ToString();
+            updatedCustomer.LastName = HttpContext.Request.Form["lastName"].ToString();
+            updatedCustomer.Age = int.Parse(HttpContext.Request.Form["age"].ToString());
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
