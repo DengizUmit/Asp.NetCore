@@ -10,6 +10,7 @@ namespace AspNetCore.Controllers
     // [Route("[controller]/[action]")]
     public class HomeController : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
             var customers = CustomerContext.Customers;
@@ -17,19 +18,33 @@ namespace AspNetCore.Controllers
             return View(customers);
         }
 
-        public interface ITest
+        [HttpGet]
+        public IActionResult Create()
         {
-
+            return View();
         }
 
-        public class Test : ITest
+        [HttpPost]
+        public IActionResult CreateWithForm()
         {
+            var firstName = HttpContext.Request.Form["firstName"].ToString();
+            var lastName = HttpContext.Request.Form["lastName"].ToString();
+            var age = int.Parse(HttpContext.Request.Form["age"].ToString());
 
+            var lastCustomer = CustomerContext.Customers.Last();
+
+            var id = lastCustomer.Id + 1;
+
+            CustomerContext.Customers.Add( new Customer
+            {
+                Id = id,
+                FirstName = firstName,
+                LastName = lastName,
+                Age = age
+            });
+
+            return RedirectToAction("Index");
         }
 
-        public class Test2 : ITest
-        {
-
-        }
     }
 }
