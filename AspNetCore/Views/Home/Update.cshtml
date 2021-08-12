@@ -1,4 +1,6 @@
-﻿@model AspNetCore.Models.Customer
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model AspNetCore.Models.Customer
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -15,7 +17,7 @@
 
         <h3> Update Customer </h3>
 
-        <form action="/Home/UpdateCustomer" method="post">
+        <form asp-action="UpdateCustomer" asp-controller="Home" method="post">
 
             <input type="hidden" name="id" value="@Model." />
 
