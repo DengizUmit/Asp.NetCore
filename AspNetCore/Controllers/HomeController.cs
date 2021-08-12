@@ -31,9 +31,17 @@ namespace AspNetCore.Controllers
             var lastName = HttpContext.Request.Form["lastName"].ToString();
             var age = int.Parse(HttpContext.Request.Form["age"].ToString());
 
-            var lastCustomer = CustomerContext.Customers.Last();
+            Customer lastCustomer = null;
+            if (CustomerContext.Customers.Count > 0)
+            {
+                lastCustomer = CustomerContext.Customers.Last();
+            }
 
-            var id = lastCustomer.Id + 1;
+            int id = 1;
+            if (lastCustomer != null)
+            {
+                id = lastCustomer.Id + 1;
+            }
 
             CustomerContext.Customers.Add( new Customer
             {
@@ -42,6 +50,17 @@ namespace AspNetCore.Controllers
                 LastName = lastName,
                 Age = age
             });
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Delete()
+        {
+            var id = int.Parse(RouteData.Values["id"].ToString());
+
+            var removedCustomer = CustomerContext.Customers.Find(I => I.Id == id);
+            CustomerContext.Customers.Remove(removedCustomer);
 
             return RedirectToAction("Index");
         }
