@@ -9,8 +9,8 @@ namespace AspNetCore.Models
     {
         public static List<Customer> Customers = new()
         {
-            new Customer { FirstName = "Umit", LastName = "Dengiz", Age = 23 },
-            new Customer { FirstName = "Cumali", LastName = "Hezex'i", Age = 18 }
+            new Customer { Id = 1, FirstName = "Umit", LastName = "Dengiz", Age = 23 },
+            new Customer { Id = 2, FirstName = "Cumali", LastName = "Hezex'i", Age = 18 }
         };
     }
 }

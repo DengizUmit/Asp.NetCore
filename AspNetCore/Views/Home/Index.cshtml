@@ -7,17 +7,18 @@
 
         <title> Customer - List </title>
         <link href="~/css/site.css" rel="stylesheet" />
-        @*<link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />*@
-        <link href="~/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     </head>
 
     <body>
+        <a href="/Home/Create">Create</a>
         <table class="table table-hover table-bordered">
             <thead>
                 <tr>
                     <td> First Name </td>
                     <td> Last Name </td>
                     <td> Age </td>
+                    <th>  </th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +28,10 @@
                         <td> @item.FirstName </td>
                         <td> @item.LastName </td>
                         <td> @item.Age </td>
+                        <td>
+                            <a href="/Home/Update/@item.Id">Update</a>
+                            <a href="/Home/Delete/@item.Id">Delete</a>
+                        </td>
                     </tr>
                 }
             </tbody>
