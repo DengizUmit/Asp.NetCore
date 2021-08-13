@@ -1,4 +1,4 @@
-﻿@model DirectoryInfo[]
+﻿@model FileInfo[]
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -17,14 +17,14 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td> @item.Name </td>
-            <td> @item.CreationTime </td>
-            <td> @item.FullName </td>
-            <td>
-                <a asp-action="Delete" asp-route-folderName="@item.Name">Delete</a>
-            </td>
-        </tr>
+            <tr>
+                <td> @item.Name </td>
+                <td> @item.CreationTime </td>
+                <td> @item.FullName </td>
+                <td>
+                    <a asp-action="Delete" asp-route-fileName="@item.Name">Delete</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

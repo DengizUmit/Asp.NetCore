@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\pdfs\" />
     <Folder Include="wwwroot\z\" />
     <Folder Include="wwwroot\x\" />
     <Folder Include="wwwroot\y\" />
