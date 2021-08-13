@@ -21,44 +21,34 @@ namespace AspNetCore.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            return View(new Customer());
         }
 
-        [HttpPost]
-        public IActionResult CreateWithForm()
-        {
-            var firstName = HttpContext.Request.Form["firstName"].ToString();
-            var lastName = HttpContext.Request.Form["lastName"].ToString();
-            var age = int.Parse(HttpContext.Request.Form["age"].ToString());
+        // Model Binding
 
+        [HttpPost]
+        public IActionResult Create(Customer customer)
+        {
             Customer lastCustomer = null;
             if (CustomerContext.Customers.Count > 0)
             {
                 lastCustomer = CustomerContext.Customers.Last();
             }
 
-            int id = 1;
+            customer.Id = 1;
             if (lastCustomer != null)
             {
-                id = lastCustomer.Id + 1;
+                customer.Id = lastCustomer.Id + 1;
             }
 
-            CustomerContext.Customers.Add( new Customer
-            {
-                Id = id,
-                FirstName = firstName,
-                LastName = lastName,
-                Age = age
-            });
+            CustomerContext.Customers.Add(customer);
 
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public IActionResult Delete()
+        public IActionResult Delete(int id)
         {
-            var id = int.Parse(RouteData.Values["id"].ToString());
-
             var removedCustomer = CustomerContext.Customers.Find(I => I.Id == id);
             CustomerContext.Customers.Remove(removedCustomer);
 
@@ -66,25 +56,22 @@ namespace AspNetCore.Controllers
         }
 
         [HttpGet]
-        public IActionResult Update()
+        public IActionResult Update(int id)
         {
-            var id = int.Parse(RouteData.Values["id"].ToString());
-
             var updatedCustomer = CustomerContext.Customers.FirstOrDefault(a => a.Id == id);
 
             return View(updatedCustomer);
         }
 
         [HttpPost]
-        public IActionResult UpdateCustomer()
+        public IActionResult Update(Customer customer)
         {
-            var id = int.Parse(HttpContext.Request.Form["id"].ToString());
 
-            var updatedCustomer = CustomerContext.Customers.FirstOrDefault(a => a.Id == id);
+            var updatedCustomer = CustomerContext.Customers.FirstOrDefault(a => a.Id == customer.Id);
 
-            updatedCustomer.FirstName = HttpContext.Request.Form["firstName"].ToString();
-            updatedCustomer.LastName = HttpContext.Request.Form["lastName"].ToString();
-            updatedCustomer.Age = int.Parse(HttpContext.Request.Form["age"].ToString());
+            updatedCustomer.FirstName = customer.FirstName;
+            updatedCustomer.LastName = customer.LastName;
+            updatedCustomer.Age = customer.Age;
 
             return RedirectToAction("Index");
         }
