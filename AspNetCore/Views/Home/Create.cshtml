@@ -2,47 +2,31 @@
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model Customer
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<h3> Create Customer </h3>
 
-<head>
+<form asp-action="Create" asp-controller="Home" method="post">
 
-    <title> Create Customer </title>
-    <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-</head>
-
-<body>
-
-    <div class="container">
-
-        <h3> Create Customer </h3>
-
-        <form asp-action="Create" asp-controller="Home" method="post">
-
-            <div class="form-group">
-                <label> Customer First Name </label>
-                <input asp-for="@Model.FirstName" class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <label> Customer Last Name </label>
-                <input asp-for="@Model.LastName" class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <label> Customer Age </label>
-                <input asp-for="@Model.Age" class="form-control" />
-            </div>
-
-            <div class="form-group text-left">
-                <button type="submit" class="btn btn-primary"> Create </button>
-            </div>
-
-        </form>
-
+    <div class="form-group">
+        <label> Customer First Name </label>
+        <input asp-for="@Model.FirstName" class="form-control" />
     </div>
 
-</body>
+    <div class="form-group">
+        <label> Customer Last Name </label>
+        <input asp-for="@Model.LastName" class="form-control" />
+    </div>
 
-</html>
+    <div class="form-group">
+        <label> Customer Age </label>
+        <input asp-for="@Model.Age" class="form-control" />
+    </div>
+
+    <div class="form-group text-left">
+        <button type="submit" class="btn btn-primary"> Create </button>
+    </div>
+
+</form>
