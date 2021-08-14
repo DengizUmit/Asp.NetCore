@@ -1,4 +1,5 @@
-﻿using AspNetCore.Models;
+﻿using AspNetCore.Filters;
+using AspNetCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace AspNetCore.Controllers
         // Model Binding
 
         [HttpPost]
+        [ValidFirstName]
         public IActionResult Create(Customer customer)
         {
             //var control = ModelState.IsValid;
