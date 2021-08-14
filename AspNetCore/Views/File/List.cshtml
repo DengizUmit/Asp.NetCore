@@ -4,12 +4,14 @@
 }
 
 <div class="row">
-
+    <h3>News List</h3>
     <div class="col-4">
-        <partial name="_NewsPartial" model="NewsContext.List" />
+        @await Component.InvokeAsync("News", new { @color="blue" })
+        @*<partial name="_NewsPartial" model="NewsContext.List" />*@
     </div>
 
     <div class="col-8">
+        <h3>File List</h3>
         <a asp-action="Create">Create</a>
         <table class="table table-hover table-bordered">
             <thead>
