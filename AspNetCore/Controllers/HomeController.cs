@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -92,6 +93,29 @@ namespace AspNetCore.Controllers
         public IActionResult Error()
         {
             var exceptionHandlerPathFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+
+            var logFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "logs");
+            DirectoryInfo directoryInfo = new DirectoryInfo(logFolderPath);
+
+            var logFileName = DateTime.Now.ToString();
+            logFileName = logFileName.Replace(" ", "_");
+            logFileName = logFileName.Replace(":", "-");
+            logFileName = logFileName.Replace("/", "-");
+
+            logFileName += ".txt";
+
+            var logFilePath = Path.Combine(logFolderPath, logFileName);
+
+            if (!directoryInfo.Exists)
+            {
+                directoryInfo.Create();
+            }
+
+            FileInfo fileInfo = new FileInfo(logFilePath);
+            var writer = fileInfo.CreateText();
+            writer.WriteLine("Error Path: ", exceptionHandlerPathFeature.Path);
+            writer.WriteLine("Error Message: ", exceptionHandlerPathFeature.Error.Message);
+            writer.Close();
 
             return View();
         }
