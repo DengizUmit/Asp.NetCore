@@ -29,21 +29,31 @@ namespace AspNetCore.Controllers
         [HttpPost]
         public IActionResult Create(Customer customer)
         {
-            Customer lastCustomer = null;
-            if (CustomerContext.Customers.Count > 0)
+            //var control = ModelState.IsValid;
+            //var errors = ModelState.Values.SelectMany(I => I.Errors.Select(I => I.ErrorMessage));
+
+            ModelState.Remove("Id");
+
+            if (ModelState.IsValid)
             {
-                lastCustomer = CustomerContext.Customers.Last();
+                Customer lastCustomer = null;
+                if (CustomerContext.Customers.Count > 0)
+                {
+                    lastCustomer = CustomerContext.Customers.Last();
+                }
+
+                customer.Id = 1;
+                if (lastCustomer != null)
+                {
+                    customer.Id = lastCustomer.Id + 1;
+                }
+
+                CustomerContext.Customers.Add(customer);
+
+                return RedirectToAction("Index");
             }
 
-            customer.Id = 1;
-            if (lastCustomer != null)
-            {
-                customer.Id = lastCustomer.Id + 1;
-            }
-
-            CustomerContext.Customers.Add(customer);
-
-            return RedirectToAction("Index");
+            return View();
         }
 
         [HttpGet]
