@@ -1,5 +1,6 @@
 ﻿using AspNetCore.Filters;
 using AspNetCore.Models;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -86,6 +87,13 @@ namespace AspNetCore.Controllers
             updatedCustomer.Age = customer.Age;
 
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Error()
+        {
+            var exceptionHandlerPathFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+
+            return View();
         }
 
     }

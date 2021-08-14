@@ -45,6 +45,8 @@ namespace AspNetCore
                 app.UseHsts();
             }
 
+            app.UseExceptionHandler("/Home/Error");
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions
