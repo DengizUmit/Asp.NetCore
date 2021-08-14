@@ -4,28 +4,39 @@
 }
 
             <h3>Customer List</h3>
-            <a asp-action="Create" , asp-controller="Home">Create</a>
-            <table class="table table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <td> First Name </td>
-                        <td> Last Name </td>
-                        <td> Age </td>
-                        <th>  </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td> @item.FirstName </td>
-                            <td> @item.LastName </td>
-                            <td> @item.Age </td>
-                            <td>
-                                <a asp-action="Update" , asp-controller="Home" , asp-route-id="@item.Id">Update</a>
-                                <a asp-action="Delete" , asp-controller="Home" , asp-route-id="@item.Id">Delete</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+
+            <div class="row">
+
+                <div class="col-4">
+                    <partial name="_NewsPartial" model="NewsContext.List" />
+                </div>
+
+                <div class="col-8">
+                    <a asp-action="Create" , asp-controller="Home">Create</a>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <td> First Name </td>
+                                <td> Last Name </td>
+                                <td> Age </td>
+                                <th>  </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td> @item.FirstName </td>
+                                    <td> @item.LastName </td>
+                                    <td> @item.Age </td>
+                                    <td>
+                                        <a asp-action="Update" , asp-controller="Home" , asp-route-id="@item.Id">Update</a>
+                                        <a asp-action="Delete" , asp-controller="Home" , asp-route-id="@item.Id">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
